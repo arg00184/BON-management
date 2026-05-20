@@ -2,17 +2,17 @@
 
 @theme {
 	--font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-	--color-bon-950: #10243f;
+	--color-bon-950: #0f1f3c;
 	--color-bon-900: #173b6d;
 	--color-bon-800: #dff0ff;
 	--color-bon-100: #ffffff;
-	--color-bon-soft: #f5f9ff;
-	--color-bon-blue: #1769ff;
-	--color-bon-sky: #35baf6;
-	--color-bon-pink: #ff4f9a;
-	--color-bon-coral: #ff7667;
-	--color-bon-lilac: #8b6dff;
-	--color-bon-line: #d8e6f7;
+	--color-bon-soft: #f7faff;
+	--color-bon-blue: #1a6dff;
+	--color-bon-sky: #38b6f6;
+	--color-bon-pink: #ff5a9d;
+	--color-bon-coral: #ff7a6b;
+	--color-bon-lilac: #9171ff;
+	--color-bon-line: #e2ecf7;
 }
 
 @layer base {
@@ -22,19 +22,21 @@
 
 	html {
 		scroll-behavior: smooth;
-		background: var(--color-bon-soft);
+		background: #ffffff;
 	}
 
 	body {
 		margin: 0;
 		min-height: 100vh;
 		background:
-			radial-gradient(circle at 10% 8%, rgba(53, 186, 246, 0.2), transparent 28rem),
-			radial-gradient(circle at 86% 12%, rgba(255, 79, 154, 0.14), transparent 30rem),
-			linear-gradient(180deg, #ffffff 0%, #f5f9ff 42%, #ffffff 100%);
+			radial-gradient(ellipse 80% 50% at 10% 5%, rgba(56, 182, 246, 0.12), transparent 50%),
+			radial-gradient(ellipse 70% 40% at 90% 8%, rgba(255, 90, 157, 0.08), transparent 45%),
+			radial-gradient(ellipse 50% 30% at 50% 90%, rgba(145, 113, 255, 0.05), transparent 40%),
+			linear-gradient(180deg, #ffffff 0%, #f7faff 50%, #ffffff 100%);
 		color: var(--color-bon-950);
 		font-family: var(--font-sans);
 		text-rendering: geometricPrecision;
+		-webkit-font-smoothing: antialiased;
 	}
 
 	a {
@@ -66,15 +68,17 @@
 	}
 
 	.surface-line {
-		border: 1px solid rgba(23, 59, 109, 0.11);
-		box-shadow: 0 18px 55px rgba(16, 36, 63, 0.08);
+		border: 1px solid rgba(23, 59, 109, 0.08);
+		box-shadow: 
+			0 1px 2px rgba(16, 36, 63, 0.04),
+			0 12px 40px rgba(16, 36, 63, 0.06);
 	}
 
 	.soft-grid {
 		background-image:
-			linear-gradient(rgba(23, 105, 255, 0.06) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(23, 105, 255, 0.06) 1px, transparent 1px);
-		background-size: 32px 32px;
+			linear-gradient(rgba(26, 109, 255, 0.04) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(26, 109, 255, 0.04) 1px, transparent 1px);
+		background-size: 40px 40px;
 	}
 
 	.focus-ring {
