@@ -8,10 +8,10 @@ export default function CtaSection() {
           className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-bon-blue via-bon-blue to-bon-950 p-8 text-white sm:p-14 lg:p-20"
           data-reveal
         >
-          {/* Decorative elements */}
-          <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-bon-sky/20 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-bon-pink/15 blur-3xl" />
-          <div className="absolute right-1/4 top-1/2 h-40 w-40 rounded-full bg-bon-lilac/10 blur-2xl" />
+          {/* Decorative elements - hidden on mobile for performance */}
+          <div className="pointer-events-none absolute -right-20 -top-20 hidden h-80 w-80 rounded-full bg-bon-sky/20 blur-3xl md:block" />
+          <div className="pointer-events-none absolute -bottom-20 -left-20 hidden h-64 w-64 rounded-full bg-bon-pink/15 blur-3xl md:block" />
+          <div className="pointer-events-none absolute right-1/4 top-1/2 hidden h-40 w-40 rounded-full bg-bon-lilac/10 blur-2xl md:block" />
 
           {/* Grid pattern overlay */}
           <div
@@ -50,7 +50,7 @@ export default function CtaSection() {
               </a>
 
               <a
-                className="focus-ring inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-sm font-semibold text-white backdrop-blur transition-all duration-300 hover:border-white/40 hover:bg-white/10"
+                className="focus-ring inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-sm font-semibold text-white transition-all duration-300 hover:border-white/40 hover:bg-white/10"
                 href="#servicios"
               >
                 Ver servicios

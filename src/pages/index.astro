@@ -80,14 +80,14 @@ const steps = [
 	<main class="overflow-hidden">
 		<!-- Hero Section -->
 		<section id="inicio" class="soft-grid relative min-h-screen px-5 pb-24 pt-28 sm:px-8 lg:pt-32">
-			<!-- Decorative blurs -->
-			<div class="absolute left-[5%] top-[10%] h-96 w-96 rounded-full bg-bon-sky/15 blur-[100px]"></div>
-			<div class="absolute right-[10%] top-[20%] h-80 w-80 rounded-full bg-bon-pink/10 blur-[80px]"></div>
-			<div class="absolute bottom-[20%] left-[40%] h-64 w-64 rounded-full bg-bon-lilac/8 blur-[60px]"></div>
+			<!-- Decorative blurs - hidden on mobile for performance -->
+			<div class="pointer-events-none absolute left-[5%] top-[10%] hidden h-96 w-96 rounded-full bg-bon-sky/15 blur-[100px] md:block"></div>
+			<div class="pointer-events-none absolute right-[10%] top-[20%] hidden h-80 w-80 rounded-full bg-bon-pink/10 blur-[80px] md:block"></div>
+			<div class="pointer-events-none absolute bottom-[20%] left-[40%] hidden h-64 w-64 rounded-full bg-bon-lilac/8 blur-[60px] md:block"></div>
 
 			<div class="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
 				<div data-reveal>
-					<div class="mb-6 inline-flex items-center gap-2 rounded-full border border-bon-blue/15 bg-white/80 px-5 py-2.5 shadow-sm backdrop-blur">
+					<div class="mb-6 inline-flex items-center gap-2 rounded-full border border-bon-blue/15 bg-white/80 px-5 py-2.5 shadow-sm">
 						<span class="h-2 w-2 animate-pulse rounded-full bg-bon-blue"></span>
 						<span class="text-sm font-medium text-bon-950/70">OnlyFans Management para creadoras que quieren crecer en serio</span>
 					</div>
@@ -121,19 +121,19 @@ const steps = [
 
 					<!-- Stats -->
 					<div class="mt-14 grid max-w-lg grid-cols-3 gap-4">
-						<div class="group rounded-2xl bg-white/70 p-5 shadow-sm ring-1 ring-bon-line/60 backdrop-blur transition-all duration-300 hover:bg-white hover:shadow-md">
+						<div class="group rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-bon-line/60 transition-all duration-300 hover:bg-white hover:shadow-md">
 							<p class="text-3xl font-bold text-bon-blue">
 								+<span data-counter="38">0</span>%
 							</p>
 							<p class="mt-2 text-xs font-medium text-bon-950/50">Retencion objetivo</p>
 						</div>
-						<div class="group rounded-2xl bg-white/70 p-5 shadow-sm ring-1 ring-bon-line/60 backdrop-blur transition-all duration-300 hover:bg-white hover:shadow-md">
+						<div class="group rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-bon-line/60 transition-all duration-300 hover:bg-white hover:shadow-md">
 							<p class="text-3xl font-bold text-bon-pink">
 								<span data-counter="4">0</span>x
 							</p>
 							<p class="mt-2 text-xs font-medium text-bon-950/50">Tests semanales</p>
 						</div>
-						<div class="group rounded-2xl bg-white/70 p-5 shadow-sm ring-1 ring-bon-line/60 backdrop-blur transition-all duration-300 hover:bg-white hover:shadow-md">
+						<div class="group rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-bon-line/60 transition-all duration-300 hover:bg-white hover:shadow-md">
 							<p class="text-3xl font-bold text-bon-lilac">24/7</p>
 							<p class="mt-2 text-xs font-medium text-bon-950/50">Operacion activa</p>
 						</div>
@@ -142,9 +142,9 @@ const steps = [
 
 				<!-- Hero Visual -->
 				<div class="relative" data-reveal>
-					<!-- Floating decorative elements -->
-					<div class="absolute -left-6 top-8 h-24 w-24 rounded-full bg-bon-pink/20 blur-2xl"></div>
-					<div class="absolute -right-8 bottom-12 h-32 w-32 rounded-full bg-bon-sky/25 blur-2xl"></div>
+					<!-- Floating decorative elements - hidden on mobile -->
+					<div class="pointer-events-none absolute -left-6 top-8 hidden h-24 w-24 rounded-full bg-bon-pink/20 blur-2xl md:block"></div>
+					<div class="pointer-events-none absolute -right-8 bottom-12 hidden h-32 w-32 rounded-full bg-bon-sky/25 blur-2xl md:block"></div>
 
 					<div class="surface-line relative overflow-hidden rounded-3xl bg-white p-3 sm:p-4">
 						<img
@@ -295,6 +295,7 @@ const steps = [
 		gsap.registerPlugin(ScrollTrigger);
 
 		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const isMobile = window.innerWidth < 768;
 
 		const animateCounter = (element: HTMLElement) => {
 			const target = Number(element.dataset.counter ?? '0');
@@ -311,31 +312,41 @@ const steps = [
 		};
 
 		const initAnimations = () => {
+			// Set initial visibility for reveal elements
+			const allReveals = document.querySelectorAll('[data-reveal]');
+
 			if (!reduceMotion) {
+				// Set initial state
+				gsap.set(allReveals, { autoAlpha: 0, y: isMobile ? 30 : 48 });
+
 				// Staggered reveal animations
 				const sections = document.querySelectorAll('section');
 
 				sections.forEach((section) => {
 					const reveals = section.querySelectorAll('[data-reveal]');
+					if (reveals.length === 0) return;
 
-					gsap.fromTo(
-						reveals,
-						{ autoAlpha: 0, y: 48 },
-						{
-							autoAlpha: 1,
-							duration: 1,
-							ease: 'power3.out',
-							stagger: 0.12,
-							y: 0,
-							scrollTrigger: {
-								trigger: section,
-								start: 'top 78%',
-							},
+					gsap.to(reveals, {
+						autoAlpha: 1,
+						duration: isMobile ? 0.6 : 0.9,
+						ease: 'power2.out',
+						stagger: isMobile ? 0.08 : 0.12,
+						y: 0,
+						scrollTrigger: {
+							trigger: section,
+							start: isMobile ? 'top 85%' : 'top 78%',
+							once: true,
 						},
-					);
+					});
 				});
 
-				ScrollTrigger.refresh();
+				// Refresh after a short delay to ensure DOM is ready
+				requestAnimationFrame(() => {
+					ScrollTrigger.refresh();
+				});
+			} else {
+				// If reduced motion, just show everything
+				gsap.set(allReveals, { autoAlpha: 1, y: 0 });
 			}
 
 			// Counter animations
@@ -364,10 +375,16 @@ const steps = [
 			});
 		};
 
-		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', initAnimations, { once: true });
+		// Wait for everything to be ready
+		const start = () => {
+			// Small delay to ensure Astro hydration is complete
+			setTimeout(initAnimations, 100);
+		};
+
+		if (document.readyState === 'complete') {
+			start();
 		} else {
-			initAnimations();
+			window.addEventListener('load', start, { once: true });
 		}
 	</script>
 </BaseLayout>

@@ -24,7 +24,7 @@ export default function Header() {
     <header
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "border-b border-bon-line/80 bg-white/90 backdrop-blur-xl"
+          ? "border-b border-bon-line/80 bg-white/95 supports-[backdrop-filter]:bg-white/85 supports-[backdrop-filter]:backdrop-blur-md"
           : "bg-transparent"
       }`}
     >
@@ -78,8 +78,8 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`absolute left-0 right-0 top-full overflow-hidden bg-white/95 backdrop-blur-xl transition-all duration-300 md:hidden ${
-          isMenuOpen ? "max-h-80 border-b border-bon-line/80" : "max-h-0"
+        className={`absolute left-0 right-0 top-full overflow-hidden bg-white transition-all duration-300 md:hidden ${
+          isMenuOpen ? "max-h-80 border-b border-bon-line/80 shadow-lg" : "max-h-0"
         }`}
       >
         <nav className="flex flex-col px-5 py-4" aria-label="Menu movil">
