@@ -29,3 +29,7 @@ src/
 ```
 
 La pagina inicial ya incluye secciones de hero, sistema, servicios, proceso y CTA para validar el flujo visual antes de entrar en identidad final, copywriting y assets.
+
+## Assets
+
+- `public/images/creator-studio.jpg`: imagen editorial de Unsplash usada como placeholder visual para el hero.
